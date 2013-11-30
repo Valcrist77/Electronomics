@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require Chart
 //= require underscore
 //= require backbone
 //= require ticket_pricer

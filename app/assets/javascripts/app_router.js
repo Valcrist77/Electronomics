@@ -1,12 +1,21 @@
 TicketPricer.Routers.AppRouter = Backbone.Router.extend({
   routes: {
-    '' : 'showMainPage'
+    '' : 'showMainPage',
+    'events/:id' : 'showEventPage'
   },
 
   showMainPage: function(){
     var mainPageView = new TicketPricer.Views.MainPageView();
 
     this._swapView(mainPageView);
+  },
+
+  showEventPage: function(id){
+    var eventPageView = new TicketPricer.Views.EventPageView({
+      model: TicketPricer.events.get(id)
+    });
+
+    this._swapView(eventPageView);
   },
 
   _swapView: function(newView){
