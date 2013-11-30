@@ -11,11 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131128074059) do
+ActiveRecord::Schema.define(:version => 20131130042641) do
 
   create_table "events", :force => true do |t|
+    t.string   "name"
+    t.string   "location"
+    t.date     "event_date"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "listings", :force => true do |t|
+    t.integer  "price",      :null => false
+    t.string   "title",      :null => false
+    t.date     "date",       :null => false
+    t.integer  "event_id",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "listings", ["event_id"], :name => "index_listings_on_event_id"
 
 end
