@@ -7,7 +7,7 @@ class EventsController < ApplicationController
     @event.buildListings
 
     if @event.save
-      render :json => @event
+      render :json => @event, :include => :listings
     else
       render :json => @event.errors.full_messages
     end
@@ -15,7 +15,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
-    render :json => @events
+    render :json => @events, :include => :listings
   end
 
   def show

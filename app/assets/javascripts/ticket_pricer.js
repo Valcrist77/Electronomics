@@ -4,8 +4,13 @@ window.TicketPricer = {
   Views: {},
   Routers: {},
   initialize: function() {
-    new TicketPricer.Routers.AppRouter();
-    Backbone.history.start();
+    TicketPricer.events = new TicketPricer.Collections.Events();
+    TicketPricer.events.fetch({
+      success: function(){
+        new TicketPricer.Routers.AppRouter();
+        Backbone.history.start();
+      }
+    });
   }
 };
 
