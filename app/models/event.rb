@@ -30,7 +30,7 @@ class Event < ActiveRecord::Base
 
       price_avg += price
       counter += 1
-      # clListing = Listing.create(title: title, price: price, date: date, event_id: this.id)
+      clListing = Listing.create(title: title, price: price, date: date, event_id: self.id)
     end
 
     puts "The avg is " + "#{price_avg / counter}"
