@@ -25,8 +25,6 @@ TicketPricer.Views.EventPageView = Backbone.View.extend({
       priceData.push(_.reduce(dateHash[date], function(memo, num){ return memo + num; }, 0) / dateHash[date].length)
     });
 
-    debugger
-
     var data = {
       labels : dates,
       datasets : [

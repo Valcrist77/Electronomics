@@ -5,7 +5,9 @@ class Event < ActiveRecord::Base
   has_many :listings
 
   def buildListings
-    url = "http://sfbay.craigslist.org/search/?sort=rel&areaID=1&subAreaID=&query=not+so+silent+night&catAbb=sss"
+    eventStr = self.name.split(" ").join("+")
+
+    url = "http://sfbay.craigslist.org/search/?sort=rel&areaID=1&subAreaID=&query=" + eventStr + "&catAbb=sss"
 
     doc = Nokogiri::HTML(open(url))
 
