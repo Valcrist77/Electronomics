@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   require 'open-uri'
-  attr_accessible :name, :event_date, :location, :keywords
+  attr_accessible :name, :event_date, :location, :keywords, :base_price
 
   has_many :listings
 
@@ -21,19 +21,13 @@ class Event < ActiveRecord::Base
 
       numTickets = /\d\s[tT]i/.match(title) 
       if numTickets != nil
-        puts "this is a match: " + "#{numTickets}"
-        puts "altered price is " + "#{(price / numTickets[0].to_i).to_f}"
         price = (price / numTickets[0].to_i).to_f
       end
-
-      puts "#{date}" + " #{title}" + " #{price}"
 
       price_avg += price
       counter += 1
       clListing = Listing.create(title: title, price: price, date: date, event_id: self.id)
     end
-
-    puts "The avg is " + "#{price_avg / counter}"
   end
 
 end
