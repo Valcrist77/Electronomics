@@ -1,0 +1,23 @@
+<h1>All events</h1>
+
+<% events.forEach( function(event) { %>
+  <a href=<%= "#events/" + event.id %>><%= event.get('name') %></a><br>
+<% }); %>
+
+<h1>Create Event<h1>
+
+<form>
+  <label for="name">Name of Event</label>
+  <input type="text" name="event[name]"><br>
+
+  <label for="location">Name of Location</label>
+  <input type="text" name="event[location]"><br>
+
+  <label for="event-date">Event Date</label>
+  <input type="date" name="event[event_date]"><br>
+
+  <label for="base-price">Base Price</label>
+  <input type="number" name="event[base_price]"><br>
+
+  <input type="submit" value="Submit Event">
+</form>

@@ -1,3 +1,6 @@
-<h1>This is model number <%= event.id %>'s page</h1>
+<h1><%= event.get('name')%></h1>
 
 <canvas id="priceChart" width="500" height="500"></canvas>
+
+<h2>Update Listings</h2>
+<button type="button" class="chartUpdate">Update</button>

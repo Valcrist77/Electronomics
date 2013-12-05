@@ -12,9 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.serializeJSON
 //= require Chart
 //= require underscore
 //= require backbone
+//= require bootstrap
 //= require ticket_pricer
 //= require_tree ../templates
 //= require_tree ./models

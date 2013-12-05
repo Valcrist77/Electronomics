@@ -1,6 +1,26 @@
 TicketPricer.Views.EventPageView = Backbone.View.extend({
   template: JST['event'],
 
+  initialize: function(options){
+    this.listenTo(this.model, 'change', this.render);
+  },
+
+  events: {
+    'click .chartUpdate' : 'buildListings'
+  },
+
+  buildListings: function(event){
+    var that = this;
+    var eventID = this.model.id
+    $.ajax({
+      url: "/events/" + eventID + "/buildListings",
+      type: "PUT",
+      success: function() {
+        this.model.fetch();
+      }
+    })
+  },
+
   render: function(){
     var renderedContent = this.template({
       event: this.model

@@ -4,10 +4,8 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
 
-    @event.buildListings
-
     if @event.save
-      render :json => @event, :include => :listings
+      render :json => @event
     else
       render :json => @event.errors.full_messages
     end
@@ -23,4 +21,11 @@ class EventsController < ApplicationController
     render :json => @event
   end
 
+  def buildListings
+    @event = Event.find(params[:id])
+    @event.buildListings
+    respond_to do |format|
+      format.json { head :ok }
+    end
+  end
 end
