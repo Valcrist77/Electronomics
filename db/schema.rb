@@ -11,15 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131201030228) do
+ActiveRecord::Schema.define(:version => 20131205095856) do
+
+  create_table "artists", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "events", :force => true do |t|
     t.string   "name"
-    t.string   "location"
     t.date     "event_date"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "base_price"
+    t.integer  "venue_id"
+    t.integer  "artist_id"
   end
 
   create_table "listings", :force => true do |t|
@@ -32,5 +39,12 @@ ActiveRecord::Schema.define(:version => 20131201030228) do
   end
 
   add_index "listings", ["event_id"], :name => "index_listings_on_event_id"
+
+  create_table "venues", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

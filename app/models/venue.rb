@@ -1,3 +1,5 @@
 class Venue < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :name, :address
+
+  has_many :events
 end

@@ -1,8 +1,10 @@
 class Event < ActiveRecord::Base
   require 'open-uri'
-  attr_accessible :name, :event_date, :location, :keywords, :base_price
+  attr_accessible :name, :event_date, :location, :keywords, :base_price, :artist_id, :venue_id
 
   has_many :listings
+  belongs_to :artist
+  belongs_to :venue
 
   def buildListings
     eventStr = self.name.split(" ").join("+")
