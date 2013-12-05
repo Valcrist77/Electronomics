@@ -1,3 +1,45 @@
 // Place all the styles related to the Events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.header-board {
+  padding: 10px;
+  background-color: #00E6B8;
+  color: white;
+}
+
+.chart-board {
+  padding: 10px;
+  background-color: #757575;
+  color: white;
+}
+
+.listing-board {
+  padding: 10px;
+  background-color: #757575;
+  color: white;
+  height: 300px;
+  overflow: auto;
+}
+
+.price-stats-board {
+  padding: 10px;
+  background-color: #757575;
+  color: white;
+  hieght: 300px;
+}
+
+.price-line {
+  padding: 3px;
+  background-color: #4b8df8;
+  margin: 2px;
+  width: 150px;
+  display: inline;
+}
+
+.listing-line {
+  padding: 3px;
+  background-color: #ACACAC;
+  margin: 2px;
+  display: inline;
+}

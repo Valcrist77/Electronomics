@@ -1,6 +1,74 @@
-<h1><%= event.get('name')%></h1>
+<div class="container">
 
-<canvas id="priceChart" width="500" height="500"></canvas>
+  <!-- Top Header Boards -->
+  <div class="row">
+    <div class="col-md-4">
+      <div class="header-board">
+        <h1>Header Board</h1>
+        <h6>Update Listings</h6>
+        <button type="button" class="chartUpdate">Update</button>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="header-board">
+        <h1>Venue</h1>
+        <a class="more" href="#">View more from this Venue</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="header-board">
+        <h1>Artists</h1>
+        <a class="more" href="#">View more from these Artists</a>
+      </div>
+    </div>
+  </div>
+  <!-- End Header Boards -->
+  <br>
+  <!-- Chart Boards -->
+  <div class="row">
+    <div class="col-md-6">
+      <div class="chart-board">
+        <h1>Ticket Prices</h1>
+        <canvas id="priceChart" width="500" height="400"></canvas>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="chart-board">
+        <h1>Number of Listings</h1>
+        <canvas id="ticketChart" width="500" height="400"></canvas>
+      </div>
+    </div>
+  </div>
+  <!-- End Chart Boards -->
+  <br>
+  <!-- Listings -->
+  <div class="row">
+    <div class="col-md-8">
+      <div class="listing-board">
+        <h1>Listings</h1>
+        <% event.listings().forEach( function(listing) { %>
+          <div class="price-line">
+            <%= listing.get('date')%> <%= listing.get('price')%>
+          </div>
+          <div class="listing-line">
+            <%= listing.get('title') %>
+          </div>
+          <br>
+        <% }) %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="price-stats-board">
+        <h1>Average Price</h1>
+      </div>
+    </div>
+  </div>
+  <!-- End Listings -->
 
-<h2>Update Listings</h2>
-<button type="button" class="chartUpdate">Update</button>
+  <footer>
+    <p class="pull-right">
+      <a href="#">Back to Top</a>
+    </p>
+  </footer>
+
+</div>

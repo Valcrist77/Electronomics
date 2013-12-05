@@ -28,6 +28,7 @@ TicketPricer.Views.EventPageView = Backbone.View.extend({
     this.$el.html(renderedContent);
 
     var ctx = this.$("#priceChart").get(0).getContext("2d");
+    var ctx2 = this.$("#ticketChart").get(0).getContext('2d');
 
     var dateHash = {};
     this.model.listings().forEach( function(listing) {
@@ -41,8 +42,10 @@ TicketPricer.Views.EventPageView = Backbone.View.extend({
     var dates = _.uniq(this.model.listings().pluck('date').sort());
 
     var priceData = [];
+    var numTicketsData = [];
     dates.forEach( function(date) {
       priceData.push(_.reduce(dateHash[date], function(memo, num){ return memo + num; }, 0) / dateHash[date].length)
+      numTicketsData.push(dateHash[date].length);
     });
 
     var data = {
@@ -57,8 +60,21 @@ TicketPricer.Views.EventPageView = Backbone.View.extend({
         }
       ]
     }
+    var ticketData = {
+      labels : dates,
+      datasets : [
+        {
+          fillColor : "rgba(151,187,205,0.5)",
+          strokeColor : "rgba(151,187,205,1)",
+          pointColor : "rgba(151,187,205,1)",
+          pointStrokeColor : "#fff",
+          data : numTicketsData
+        }
+      ]
+    }
 
-    var myNewChart = new Chart(ctx).Line(data);
+    var myNewChart = new Chart(ctx).Line(data, { scaleLineColor : "#FFFFFF", scaleFontColor: "#FFFFFF" } );
+    var ticketChart = new Chart(ctx2).Line(ticketData, { scaleLineColor : "#FFFFFF", scaleFontColor: "#FFFFFF" } );
 
     return this;
   }
