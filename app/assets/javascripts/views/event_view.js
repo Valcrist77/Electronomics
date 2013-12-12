@@ -2,11 +2,12 @@ TicketPricer.Views.EventPageView = Backbone.View.extend({
   template: JST['event'],
 
   initialize: function(options){
-    this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.model, 'change add remove listing:change', this.render);
   },
 
   events: {
-    'click .chartUpdate' : 'buildListings'
+    'click .chartUpdate' : 'buildListings',
+    'click #delButton' : 'deleteListing'
   },
 
   buildListings: function(event){
@@ -15,10 +16,18 @@ TicketPricer.Views.EventPageView = Backbone.View.extend({
     $.ajax({
       url: "/events/" + eventID + "/buildListings",
       type: "PUT",
-      success: function() {
-        this.model.fetch();
+      success: function(event) {
+        that.model.set(event);
       }
     })
+  },
+
+  deleteListing: function(event) {
+    debugger
+    var listingID = event.currentTarget.getAttribute('data-id');
+    var thisListing = this.model.listings().get(listingID);
+
+    thisListing.destroy();
   },
 
   render: function(){

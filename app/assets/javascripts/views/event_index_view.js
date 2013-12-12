@@ -6,7 +6,7 @@ TicketPricer.Views.EventIndexView = Backbone.View.extend({
   },
 
   initialize: function(options) {
-    this.listenTo(TicketPricer.events, 'change', this.render);
+    this.listenTo(TicketPricer.events, 'change add remove', this.render);
   },
 
   render: function(){

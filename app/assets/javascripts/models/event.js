@@ -1,6 +1,10 @@
 TicketPricer.Models.Event = Backbone.Model.extend({
   urlRoot: '/events',
 
+  initialize: function(){
+    this.listings().on('remove', this.listingsChanged, this);
+  },
+
   listings: function(){
     if (!this._listings){
       this._listings = new TicketPricer.Collections.Listings([], { event: this });
@@ -13,5 +17,9 @@ TicketPricer.Models.Event = Backbone.Model.extend({
 
     delete serverAttributes.listings;
     return serverAttributes;
+  },
+
+  listingsChanged: function(model){
+    this.trigger('listing:change');
   }
 })

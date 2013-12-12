@@ -46,20 +46,28 @@
     <div class="col-md-8">
       <div class="listing-board">
         <h1>Listings</h1>
+        <ul class="listings">
         <% event.listings().forEach( function(listing) { %>
-          <div class="price-line">
-            <%= listing.get('date')%> <%= listing.get('price')%>
-          </div>
-          <div class="listing-line">
-            <%= listing.get('title') %>
-          </div>
-          <br>
+          <li>
+            <div class="total-line">
+              <div class="price-line">
+                <%= listing.get('date')%> <%= listing.get('price')%>
+              </div>
+              <div class="listing-line">
+                <%= listing.get('title') %>
+              </div>
+              <button type='button' id='delButton' data-id='<%=listing.id%>' class='btn-sm'>Delete</button>
+            </div>
+          </li>
         <% }) %>
+        </ul>
       </div>
     </div>
     <div class="col-md-4">
       <div class="price-stats-board">
         <h1>Average Price</h1>
+        <h3>Standard Deviation</h3>
+        <h3>Price Range</h3>
       </div>
     </div>
   </div>

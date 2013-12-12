@@ -24,8 +24,8 @@ class EventsController < ApplicationController
   def buildListings
     @event = Event.find(params[:id])
     @event.buildListings
-    respond_to do |format|
-      format.json { head :ok }
-    end
+    
+    render :json => @event, :include => :listings
   end
+
 end
