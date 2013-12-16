@@ -23,11 +23,6 @@ class Event < ActiveRecord::Base
       end
       price = listing.at_css('.l2 .price').text.delete("$").to_i
 
-      numTickets = /\d\s[tT]i/.match(title) 
-      if numTickets != nil
-        price = (price / numTickets[0].to_i).to_f
-      end
-
       price_avg += price
       counter += 1
       clListing = Listing.create(title: title, price: price, date: date, event_id: self.id)

@@ -31,14 +31,6 @@ TicketPricer.Views.EventPageView = Backbone.View.extend({
   },
 
   render: function(){
-    var renderedContent = this.template({
-      event: this.model
-    });
-    this.$el.html(renderedContent);
-
-    var ctx = this.$("#priceChart").get(0).getContext("2d");
-    var ctx2 = this.$("#ticketChart").get(0).getContext('2d');
-
     var dateHash = {};
     this.model.listings().forEach( function(listing) {
       if (dateHash[listing.get('date')] == undefined) {
@@ -57,34 +49,39 @@ TicketPricer.Views.EventPageView = Backbone.View.extend({
       numTicketsData.push(dateHash[date].length);
     });
 
-    var data = {
-      labels : dates,
-      datasets : [
-        {
-          fillColor : "rgba(151,187,205,0.5)",
-          strokeColor : "rgba(151,187,205,1)",
-          pointColor : "rgba(151,187,205,1)",
-          pointStrokeColor : "#fff",
-          data : priceData
-        }
-      ]
-    }
-    var ticketData = {
-      labels : dates,
-      datasets : [
-        {
-          fillColor : "rgba(151,187,205,0.5)",
-          strokeColor : "rgba(151,187,205,1)",
-          pointColor : "rgba(151,187,205,1)",
-          pointStrokeColor : "#fff",
-          data : numTicketsData
-        }
-      ]
-    }
+    var data = this.dataChart(dates, priceData);
+    var ticketData = this.dataChart(dates, numTicketsData);
+
+    var movingAverage = (_.reduce(priceData.slice(-7), function(memo, num){ return memo + num; }, 0) / 7).toFixed(2);
+
+    var renderedContent = this.template({
+      event: this.model,
+      average: movingAverage
+    });
+    this.$el.html(renderedContent);
+
+    var ctx = this.$("#priceChart").get(0).getContext("2d");
+    var ctx2 = this.$("#ticketChart").get(0).getContext('2d');
 
     var myNewChart = new Chart(ctx).Line(data, { scaleLineColor : "#FFFFFF", scaleFontColor: "#FFFFFF" } );
     var ticketChart = new Chart(ctx2).Line(ticketData, { scaleLineColor : "#FFFFFF", scaleFontColor: "#FFFFFF" } );
 
     return this;
+  },
+
+  dataChart: function(dateArray, dataArray){
+    var chart = {
+      labels : dateArray,
+      datasets : [
+        {
+          fillColor : "rgba(151,187,205,0.5)",
+          strokeColor : "rgba(151,187,205,1)",
+          pointColor : "rgba(151,187,205,1)",
+          pointStrokeColor : "#fff",
+          data : dataArray
+        }
+      ]
+    }
+    return chart;
   }
 })
